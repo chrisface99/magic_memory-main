@@ -10,7 +10,10 @@ export default function SingleCard({ card, handleChoice }) {
     <div className="card">
       <div>
         <img className="front" src={card.src} alt="card front" />
-        <img className="back" src="/img/cover.png" onClick={handleClick} alt="cover" />
+        <img 
+        className="back" 
+        src="/img/cover.png" 
+        onClick={handleClick} alt="cover" />
       </div>
     </div>
   )
