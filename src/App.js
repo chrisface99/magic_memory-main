@@ -13,10 +13,10 @@ const cardImages = [
 
 function App() {
   const [cards, setCards] = useState([])
-  const [turns, setTurns] = useState(0)
+  const [turns, setTurns] = useState(0) // State variable for tracking turns
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
-const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   // shuffle cards for new game
   const shuffleCards = () => {
@@ -28,19 +28,18 @@ const [disabled, setDisabled] = useState(false)
     setTurns(0)
   }
 
-
-  //handle a choice
+  // handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
-  //match cards
+  // match cards
   useEffect(() => {
     setDisabled(true)
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
         setCards(prevCards => {
-       return prevCards.map(card => {
+          return prevCards.map(card => {
             if (card.src === choiceOne.src) {
               return { ...card, matched: true }
             } else {
@@ -51,24 +50,23 @@ const [disabled, setDisabled] = useState(false)
         resetTurn()
       }
       else {
-      setTimeout(() => resetTurn(), 1000)
+        setTimeout(() => resetTurn(), 1000)
       }
     }
   }, [choiceOne, choiceTwo])
 
-  console.log(cards)
-
-  // reset choices & increase turn 
+  // reset choices & increase turn
   const resetTurn = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
-    setTurns(prevTurns => prevTurns + 1)
+    setTurns(prevTurns => prevTurns + 1) // Increment turns
     setDisabled(false)
   }
 
   return (
     <div className="App">
       <h1>Magic Match</h1>
+      <p>Turns: {turns}</p> {/* Display the number of turns */}
       <button onClick={shuffleCards}>New Game</button>
 
       <div className="card-grid">
